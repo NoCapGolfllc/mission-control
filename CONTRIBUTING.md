@@ -45,8 +45,6 @@ pnpm dev
 - `src/lib/` — Shared utilities (auth, database, config, scheduler)
 - `src/store/` — Zustand state management
 
-## Testing
-
 - **Unit tests**: Vitest — `pnpm test`
 - **E2E tests**: Playwright — `pnpm test:e2e`
 - **Type checking**: `pnpm typecheck`
