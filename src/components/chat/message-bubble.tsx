@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { useState } from 'react'
 import { ChatMessage } from '@/store'
 import { detectTextDirection } from '@/lib/chat-utils'
+import { speakText } from '@/lib/tts'
 
 const AGENT_COLORS: Record<string, { bg: string; text: string; border: string }> = {
   coordinator: { bg: 'bg-purple-500/10', text: 'text-purple-400', border: 'border-purple-500/20' },
@@ -263,6 +264,17 @@ export function MessageBubble({ message, isHuman, isGrouped }: MessageBubbleProp
             <div className="whitespace-pre-wrap break-words" dir={detectTextDirection(message.content)}>{renderContent(message.content)}</div>
           )}
         </div>
+
+        {/* TTS Button */}
+        {!isHuman && !isSystem && !isHandoff && !isToolCall && (
+          <button
+            onClick={() => speakText(message.content)}
+            className="mt-1 text-xs text-muted-foreground hover:text-foreground transition-colors"
+            title="Speak message"
+          >
+            🔊
+          </button>
+        )}
       </div>
     </div>
   )
